@@ -1,0 +1,48 @@
+//put before main--set up fonts
+const uint8_t num_chars_per_disp[]={7,7,7,5};
+const uint8_t *fonts[6]= {acme_font, bubblesstandard_font, crackers_font, BMSPA_font, renew_font, fivexfive_font};
+
+#define SLEEPTIME 25
+ 
+void display_write(char *str1);  // show strings on 1306
+ 
+//////////////////////////////////
+
+ //function to print strings to oled
+ 
+ 
+void display_write(char *str1)
+{
+// send string to 1306
+
+//initialize display
+    ssd1306_t disp;  // instantiate from struct
+    disp.external_vcc=false;
+    ssd1306_init(&disp, 128, 64, 0x3C, i2c1);
+    ssd1306_clear(&disp); //blank display
+
+/*
+	@brief draw string with given font
+
+	@param[in] p : instance of display
+	@param[in] x : x starting position of text
+	@param[in] y : y starting position of text
+	@param[in] scale : scale font to n times of original size (default should be 1)
+	@param[in] font : pointer to font
+	@param[in] s : text to draw
+*/
+ 
+    ssd1306_clear(&disp);
+    ssd1306_draw_string_with_font(&disp, 8, 24, 2, fonts[4], str1);
+    ssd1306_show(&disp);  
+
+} 
+//putting this into infinite loop prints to OLED over and over
+//includes int to string conv snprintf()
+        freq4oled = edge_counter_frequency();
+        snprintf(freqAsString, 10, "%d", freq4oled);
+        strcat(freqAsString," Hz");
+        ssd1306_clear(&disp);
+        ssd1306_draw_string_with_font(&disp, 8, 24, 2, fonts[4], freqAsString);
+        ssd1306_show(&disp);  
+      //  printf("Frequency %u Hz\n", edge_counter_frequency());

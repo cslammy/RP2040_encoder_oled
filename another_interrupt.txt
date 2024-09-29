@@ -1,0 +1,6 @@
+void my_irq_handler(void) {
+    if (gpio_get_irq_event_mask(my_gpio_num) & my_gpio_event_mask) {
+       gpio_acknowledge_irq(my_gpio_num, my_gpio_event_mask);
+      // handle the IRQ
+    }
+}
